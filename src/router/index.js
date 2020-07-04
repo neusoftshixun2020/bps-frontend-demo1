@@ -189,7 +189,7 @@ export const constantRoutes = [
     component: Layout,
     children: [{
       path: '/bvo-myInfo',
-      component: () => import('@/views/mvo/mvo-myinfo/mvo-myInfo'),
+      component: () => import('@/views/mvo/mvo-myInfo'),
       name: 'bvo-myInfo',
       meta: { title: 'My Infomation' }
     }]
@@ -200,7 +200,18 @@ export const constantRoutes = [
     hidden: true,
     children: [{
       path: '',
-      component: () => import('@/views/mvo/mvo-myinfo/component/mvo-company'),
+      component: () => import('@/views/mvo/component/mvo-company'),
+      name: '',
+      meta: { title: 'Company Information', icon: 'edit' }
+    }]
+  },
+  {
+    path: '/mvo-mycompany',
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: '',
+      component: () => import('@/views/mvo/component/mvo-mycompany'),
       name: '',
       meta: { title: 'Company Information', icon: 'edit' }
     }]
@@ -501,7 +512,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'myInfo',
-        component: () => import('@/views/mvo/mvo-myinfo/mvo-myInfo'),
+        component: () => import('@/views/mvo/mvo-myInfo'),
         name: 'myinfo',
         meta: { title: 'My Infomation' }
       },
@@ -513,7 +524,7 @@ export const asyncRoutes = [
       },
       {
         path: 'export-merge-header',
-        component: () => import('@/views/excel/merge-header'),
+        component: () => import('@/views/mvo/mvo-goods-input-pic'),
         name: 'goodsinputpic',
         meta: { title: 'Goods Input Pic' }
       },

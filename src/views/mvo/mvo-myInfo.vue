@@ -1,11 +1,52 @@
 <template>
-  <el-form ref="ruleForm" :model="ruleForm" status-icon :rules="rules" class="ruleForm">
 
-    <el-form-item label="MVO" style="margin:20px;margin-left:20px;color: #2679b5">
+  <!-- <div style="margin:20px">
+    <h1 style="color: #2679b5;">
+      MVO
       <small>
         <i class="icon-double-angle-right" /> My Information
       </small>
-    </el-form-item>
+    </h1>
+    <br>
+    <div class="flex">
+      <span>
+        Company Name：
+        <el-input style="width:200px" placeholder />
+      </span>
+      <br>
+      <span>Brief Introduction:</span>
+      <br>
+      <el-input
+        v-model="textarea2"
+        style="width:800px"
+        :autosize="{ minRows: 8, maxRows: 8}"
+        type="textarea"
+        placeholder="enter"
+      />
+      <br>
+      <span>
+        GMC Report Type：
+        <el-input style="width:200px" placeholder />
+      </span>
+      <br>
+      <span>
+        GMC Report Url：
+        <el-input style="width:200px" placeholder />
+      </span>
+      <br>
+      <el-button style="width:150px" type="danger">save</el-button>
+    </div>
+  </div> -->
+    <el-form ref="ruleForm" :model="ruleForm" status-icon :rules="rules" class="ruleForm">
+    <!-- <el-form-item label="MVO" style="margin:20px;margin-left:20px;color: #2679b5">
+      <small>
+        <i class="icon-double-angle-right" /> My Information
+      </small>
+  </el-form-item> -->
+       <el-form-item label-width="130px" label="MVO"  style="margin:20px;margin-left:20px;color: #2679b5">
+         <div >My Information</div>
+        </el-form-item>
+
 
     <el-form-item label="Company Name(Chinese)" prop="name_cn" style="margin-left:20px;">
       <el-input v-model.number="ruleForm.name_cn" style="width:200px" />
@@ -25,11 +66,11 @@
       />
     </el-form-item>
 
-    <el-form-item label="GMC Report Type " prop="gmc_report_type" style="margin-left:20px;">
-      <el-select v-model="ruleForm.gmc_report_type" placeholder="please choose">
-        <el-option label="amamzon" :value="1" />
-        <el-option label="ebay" :value="2" />
-      </el-select>
+    <el-form-item label="GMC Report Type "  style="margin-left:20px;">
+       <el-cascader
+            v-model="value"
+            :options="options"
+            @change="handleChange"></el-cascader>
     </el-form-item>
     <el-form-item label="GMC Report Url" prop="gmc_report_url" style="margin-left:20px;">
       <el-input v-model.number="ruleForm.gmc_report_url" style="width:200px" />
@@ -44,7 +85,7 @@
 
 <script>
 export default {
-  data() {
+ data() {
     return {
       ruleForm: {
         name_cn: '',
@@ -52,15 +93,15 @@ export default {
         decription: '',
         gmc_report_url: '',
         gmc_report_type: ''
-        // options: [{
-        //   value: '1',
-        //   label: 'amamzon',
-        // }, {
-        //    value: '2',
-        //   label: 'ebay',
-        // }],
-        // value: ''
       },
+      value:'',
+      options:[{
+                value:'1',
+                label:'amazon'},
+              {
+                value:'2',
+                 label:'ebay'}
+              ],
       rules: {
         name_cn: [{ required: true, message: 'Chinese name can not be null', trigger: 'blur' }],
         name_en: [{ required: true, message: 'English name can not be null', trigger: 'blur' }],
@@ -74,8 +115,11 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$router.push({
-            path: '/mvo-company'
+            path: '/mvo-mycompany'
           })
+          //  this.$router.push({
+          //   path: '/mvo-company'
+          // })
           /* 在这里进行跨域请求*/
           this.axios({
             method: 'post',
@@ -99,7 +143,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style>

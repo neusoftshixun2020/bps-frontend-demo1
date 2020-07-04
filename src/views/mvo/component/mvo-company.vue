@@ -127,146 +127,146 @@
 <script>
 export default {
   data() {
-    return {
-      comanyList: [],
-      brandList: [],
-      dialogVisible: false,
-      tidVisible: false,
-      scondition: '',
-      addFormData: {
-        name_en: '',
-        name_cn: '',
-        name_en1: '',
-        name_cn1: '',
-        decription: '',
-        gmc_report_url: '',
-        gmc_report_type: '',
-        image_url: '',
-        operationFlag: 'modify'
-      },
-      teacherRule: {
-        tname: [{
-          required: true,
-          message: "tname shouldn't be null",
-          trigger: 'blur'
-        }]
-      }
-    }
-  },
-  mounted: function() {
-    this.loadData()
-  },
-  methods: {
-    loadData() {
-      this.$store.dispatch('GetManufacturer').then((result) => {
-        this.comanyList = result.data
-      })
-      this.$store.dispatch('GetBrandByFilter').then((result) => {
-        this.brandList = result.data
-      })
-    },
-    chooseImage: {
+//     return {
+//       comanyList: [],
+//       brandList: [],
+//       dialogVisible: false,
+//       tidVisible: false,
+//       scondition: '',
+//       addFormData: {
+//         name_en: '',
+//         name_cn: '',
+//         name_en1: '',
+//         name_cn1: '',
+//         decription: '',
+//         gmc_report_url: '',
+//         gmc_report_type: '',
+//         image_url: '',
+//         operationFlag: 'modify'
+//       },
+//       teacherRule: {
+//         tname: [{
+//           required: true,
+//           message: "tname shouldn't be null",
+//           trigger: 'blur'
+//         }]
+//       }
+//     }
+//   },
+//   mounted: function() {
+//     this.loadData()
+//   },
+//   methods: {
+//     loadData() {
+//       this.$store.dispatch('GetManufacturer').then((result) => {
+//         this.comanyList = result.data
+//       })
+//       this.$store.dispatch('GetBrandByFilter').then((result) => {
+//         this.brandList = result.data
+//       })
+//     },
+//     chooseImage: {
 
-    },
-    uploadImage: {
+//     },
+//     uploadImage: {
 
-    },
-    updateManufacturer: {
+//     },
+//     updateManufacturer: {
 
-    },
-    addBrand() {
-      this.addFormData = {
-        tid: '',
-        tname: '',
-        tgender: '',
-        tduty: '',
-        tresearch: '',
-        tuniversity: '',
-        tspecialty: '',
-        operationFlag: 'add'
-      }
-      this.dialogVisible = true
-      this.tidVisible = true
+//     },
+//     addBrand() {
+//       this.addFormData = {
+//         tid: '',
+//         tname: '',
+//         tgender: '',
+//         tduty: '',
+//         tresearch: '',
+//         tuniversity: '',
+//         tspecialty: '',
+//         operationFlag: 'add'
+//       }
+//       this.dialogVisible = true
+//       this.tidVisible = true
 
-      this.$refs.addFormData.validate(valid => {
-        if (valid) {
-          console.log('the parameter is invalid')
-          this.$store.dispatch('AddBrand', this.addFormData).then((result) => {
-            if (result.data.data) {
-              this.$message({
-                type: 'info',
-                message: `Add operation succeeded`
-              })
-            } else {
-              this.$message({
-                type: 'info',
-                message: `Add operation failed`
-              })
-            }
-            this.dialogVisible = false
-            this.loadData()
-          })
-        } else {
-          console.log('the image is invalid')
-          return false
-        }
-      })
-    },
-    modifyBrand(rowData) {
-      this.addFormData = Object.assign({}, rowData)
-      this.dialogVisible = true
-      this.tidVisible = false
-      this.addFormData.operationFlag = 'modify'
-    },
+//       this.$refs.addFormData.validate(valid => {
+//         if (valid) {
+//           console.log('the parameter is invalid')
+//           this.$store.dispatch('AddBrand', this.addFormData).then((result) => {
+//             if (result.data.data) {
+//               this.$message({
+//                 type: 'info',
+//                 message: `Add operation succeeded`
+//               })
+//             } else {
+//               this.$message({
+//                 type: 'info',
+//                 message: `Add operation failed`
+//               })
+//             }
+//             this.dialogVisible = false
+//             this.loadData()
+//           })
+//         } else {
+//           console.log('the image is invalid')
+//           return false
+//         }
+//       })
+//     },
+//     modifyBrand(rowData) {
+//       this.addFormData = Object.assign({}, rowData)
+//       this.dialogVisible = true
+//       this.tidVisible = false
+//       this.addFormData.operationFlag = 'modify'
+//     },
 
-    updateBrand() {
-      this.$refs.addFormData.validate(valid => {
-        if (valid) {
-          console.log('the parameter is invalid')
-          this.$store.dispatch('UpdateBrand', this.addFormData).then((result) => {
-            if (result.data.data) {
-              this.$message({
-                type: 'info',
-                message: `update operation succeeded`
-              })
-            } else {
-              this.$message({
-                type: 'info',
-                message: `update operation failed`
-              })
-            }
-            this.dialogVisible = false
-            this.loadData()
-          })
-        } else {
-          console.log('the image is invalid')
-          return false
-        }
-      })
-    },
-    deleteBrandS(rowData) {
-      this.$confirm('Are you sure to delete the record?', 'Record Delete', {
-        confirmButtonText: 'Confirm',
-        cancelButtonText: 'Cancel',
-        type: 'warning'
-      }).then(() => {
-        this.$store.dispatch('DeleteTeacher', rowData.tid).then((result) => {
-          if (result.data.data) {
-            this.$message({
-              type: 'info',
-              message: `delete operation succeeded`
-            })
-          } else {
-            this.$message({
-              type: 'info',
-              message: `delete operation failed`
-            })
-          }
-          this.loadData()
-        })
-      }).catch(() => {
-      })
-    }
+//     updateBrand() {
+//       this.$refs.addFormData.validate(valid => {
+//         if (valid) {
+//           console.log('the parameter is invalid')
+//           this.$store.dispatch('UpdateBrand', this.addFormData).then((result) => {
+//             if (result.data.data) {
+//               this.$message({
+//                 type: 'info',
+//                 message: `update operation succeeded`
+//               })
+//             } else {
+//               this.$message({
+//                 type: 'info',
+//                 message: `update operation failed`
+//               })
+//             }
+//             this.dialogVisible = false
+//             this.loadData()
+//           })
+//         } else {
+//           console.log('the image is invalid')
+//           return false
+//         }
+//       })
+//     },
+//     deleteBrandS(rowData) {
+//       this.$confirm('Are you sure to delete the record?', 'Record Delete', {
+//         confirmButtonText: 'Confirm',
+//         cancelButtonText: 'Cancel',
+//         type: 'warning'
+//       }).then(() => {
+//         this.$store.dispatch('DeleteTeacher', rowData.tid).then((result) => {
+//           if (result.data.data) {
+//             this.$message({
+//               type: 'info',
+//               message: `delete operation succeeded`
+//             })
+//           } else {
+//             this.$message({
+//               type: 'info',
+//               message: `delete operation failed`
+//             })
+//           }
+//           this.loadData()
+//         })
+//       }).catch(() => {
+//       })
+//     }
   }
 }
 
