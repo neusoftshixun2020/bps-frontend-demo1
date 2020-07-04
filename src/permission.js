@@ -18,7 +18,7 @@ router.beforeEach(async(to, from, next) => {
   document.title = getPageTitle(to.meta.title)
 
   // determine whether the user has logged in
-  const hasToken = getToken()
+  const hasToken = store.getters.token
 
   if (hasToken) {
     if (to.path === '/login') {
@@ -27,17 +27,29 @@ router.beforeEach(async(to, from, next) => {
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
       // determine whether the user has obtained his permission roles through getInfo
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
-      if (hasRoles) {
+      const hasRole = store.getters.role
+      if (hasRole) {
         next()
       } else {
         try {
           // get user info
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-          const { roles } = await store.dispatch('user/getInfo')
 
+          const token = store.getters.token
+          store.commit('user/SET_ROLE', token)
+          const role = store.getters.role
+
+          console.log('===============================')
+          console.log('token', token)
+          console.log('===============================')
+          console.log('===============================')
+          console.log('role', role)
+          console.log('===============================')
+          console.log('===============================')
+          console.log(store)
+          console.log('===============================')
           // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          const accessRoutes = await store.dispatch('permission/generateRoutes', role)
 
           // dynamically add accessible routes
           router.addRoutes(accessRoutes)
