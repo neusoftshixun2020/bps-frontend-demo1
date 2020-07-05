@@ -6,7 +6,7 @@ const state = {
   role: '',
   username: '',
   response_status: '',
-  token: 'Super Admin'
+  token: ''
 }
 
 const mutations = {

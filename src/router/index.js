@@ -195,17 +195,6 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/mvo-company',
-    component: Layout,
-    hidden: true,
-    children: [{
-      path: '',
-      component: () => import('@/views/mvo/component/mvo-company'),
-      name: '',
-      meta: { title: 'Company Information', icon: 'edit' }
-    }]
-  },
-  {
     path: '/mvo-mycompany',
     component: Layout,
     hidden: true,
