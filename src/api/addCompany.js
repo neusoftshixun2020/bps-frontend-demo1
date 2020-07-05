@@ -104,14 +104,14 @@ export function getManByFilter () {
   })
 }
 
-export function getAll () {
-  return request({
-    url: 'manufacturer/getAll',
-    method: 'post',
-    data: {
-    }
-  })
-}
+// export function getAll () {
+//   return request({
+//     url: 'manufacturer/getAll',
+//     method: 'post',
+//     data: {
+//     }
+//   })
+// }
 
 export function getBrandByFilter(man_id) {
   return request({

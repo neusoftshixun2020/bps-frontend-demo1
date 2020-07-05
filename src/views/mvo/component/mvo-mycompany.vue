@@ -201,7 +201,7 @@ export default {
   data() {
     return {
       companylist: [],
-      BrandList:[],
+      brandList:[],
       downloadLoading: false,
       dialogVisible:false,
       dialogVisible1:false,
