@@ -7,10 +7,9 @@ export function addManufacturer() {
     data: {
       name_cn,
       name_en,
-      gmc_report_type,
-      gmc_report_url,
       description,
-      created_by
+      gmc_report_type,
+      gmc_report_url
     }
   })
 }
