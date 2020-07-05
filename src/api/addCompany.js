@@ -1,29 +1,45 @@
 import request from '@/utils/request'
 
-export function addManufacturer(name_cn,name_en,description,gmc_report_type,gmc_report_url) {
+export function addManufacturer(name_en, name_cn, gmc_report_type, gmc_report_url,
+  description, created_by, creation_date, last_update_by, last_update_date, call_cnt, remark, sts_cd, user_id) {
   return request({
     url: 'manufacturer/addManufacturer',
     method: 'post',
     data: {
-      name_cn,
-      name_en,
-      description,
-      gmc_report_type,
-      gmc_report_url
+      name_en, 
+      name_cn, 
+      gmc_report_type , 
+      gmc_report_url,
+      description, 
+      created_by, 
+      creation_date, 
+      last_update_by, 
+      last_update_date, 
+      call_cnt, remark, 
+      sts_cd, 
+      user_id
     }
   })
 }
 
-export function updateManufacturer(name_cn,name_en,description,gmc_report_type,gmc_report_url) {
+export function updateManufacturer(name_en, name_cn, gmc_report_type, gmc_report_url,
+  description, created_by, creation_date, last_update_by, last_update_date, call_cnt, remark, sts_cd, user_id) {
   return request({
-    url: 'man/UpdateManufacturer',
+    url: 'manufacturer/UpdateManufacturer',
     method: 'post',
     data: {
-      name_cn,
-      name_en,
-      description,
-      gmc_report_type,
-      gmc_report_url
+      name_en, 
+      name_cn, 
+      gmc_report_type , 
+      gmc_report_url,
+      description, 
+      created_by, 
+      creation_date, 
+      last_update_by, 
+      last_update_date, 
+      call_cnt, remark, 
+      sts_cd, 
+      user_id
     }
   })
 }
@@ -39,29 +55,58 @@ export function deleteBrand(brd_id) {
   })
 }
 
-export function addBrand(name_en) {
+export function addBrand(man_id,name_en,name_cn,created_by,creation_date,last_update_by,last_update_date,call_cnt,
+  remark,sts_cd) {
   return request({
     url: 'brand/addBrand',
     method: 'post',
     data: {
-      name_cn
+      man_id,
+      name_en,
+      name_cn,
+      created_by,
+      creation_date,
+      last_update_by,
+      last_update_date,
+      call_cnt,
+      remark,sts_cd
     }
   })
 }
 
 
-export function updateBrand( name_en) {
+export function updateBrand( man_id,name_en,name_cn,created_by,creation_date,last_update_by,last_update_date,call_cnt,
+  remark,sts_cd) {
   return request({
     url: 'brand/addOrUpdateBrand',
     method: 'post',
     data: {
-      name_en
+      man_id,
+      name_en,
+      name_cn,
+      created_by,
+      creation_date,
+      last_update_by,
+      last_update_date,
+      call_cnt,
+      remark,sts_cd
     }
   })
 }
-export function getManByFilter() {
+
+
+export function getManByFilter () {
   return request({
     url: 'manufacturer/getManByFilter',
+    method: 'post',
+    data: {
+    }
+  })
+}
+
+export function getAll () {
+  return request({
+    url: 'manufacturer/getAll',
     method: 'post',
     data: {
     }

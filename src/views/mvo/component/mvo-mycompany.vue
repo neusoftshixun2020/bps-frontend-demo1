@@ -15,6 +15,8 @@
         highlight-current-row
         width="80%"
       >
+      <el-table-column align="center" prop = ' man_id' label = 'Company ID'>
+        </el-table-column>
          <el-table-column align="center" prop = 'name_cn' label = 'Company Name(CN)'>
         </el-table-column>
         <el-table-column align="center" prop = 'name_en' label = 'Company Name(EN)'>
@@ -48,7 +50,7 @@
         <el-table-column type="selection" />
          <el-table-column align="center" prop = 'brd_id' label = 'Company Name(EN)'>
         </el-table-column>
-         <el-table-column align="center" prop = 'name_en' label = 'Company Name(EN)'>
+         <el-table-column align="center" prop = 'name_enb' label = 'Company Name(EN)'>
         </el-table-column>
           <el-table-column align="center" label="image"  >
           <template slot-scope="scope">
@@ -127,7 +129,7 @@
             </el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="Brand Name(EN)" label-width="130px"  prop='name_en'>
+        <el-form-item label="Brand Name(EN)" label-width="130px"  prop='name_enb'>
           <el-col :span="8">
             <el-input type='text' v-model='BrandData.name_en'  autocomplete='off' placeholder='Title'>
             </el-input>
@@ -142,8 +144,8 @@
             <el-input type='text' v-model='BrandData.image_url' autocomplete='off' placeholder='Image'>
           </el-input>      
           <br>
-            <el-button style="width:150px" @click="chooseImage">Choose Image</el-button>
-            <el-button style="width:150px" type="danger" @click="uploadImage">Upload Image</el-button>
+            <el-button style="width:150px" >Choose Image</el-button>
+            <el-button style="width:150px" type="danger" >Upload Image</el-button>
         </el-form-item>
 
       </el-form>
@@ -160,7 +162,7 @@
     <el-dialog title='Edit Brand' :visible.sync = 'dialogVisible2' width = '50%' :close-on-lick-modal = 'false'>
       <el-form :model = 'BrandData'  ref = 'BrandData' label-width = '0px' class = ''>
 
-        <el-form-item label="Brand Name(EN)" label-width="130px"  prop='name_en'>
+        <el-form-item label="Brand Name(EN)" label-width="130px"  prop='name_enb'>
           <el-col :span="8">
             <el-input type='text' v-model='BrandData.name_en'  autocomplete='off' placeholder='Title'>
             </el-input>
@@ -175,8 +177,8 @@
             <el-input type='text' v-model='BrandData.image_url' autocomplete='off' placeholder='Image'>
           </el-input>      
           <br>
-            <el-button style="width:150px" @click="chooseImage">Choose Image</el-button>
-            <el-button style="width:150px" type="danger" @click="uploadImage">Upload Image</el-button>
+            <el-button style="width:150px" >Choose Image</el-button>
+            <el-button style="width:150px" type="danger" >Upload Image</el-button>
         </el-form-item>
 
       </el-form>
@@ -201,13 +203,13 @@ export default {
       companylist: [],
       BrandList:[],
       downloadLoading: false,
-      proName:'',
       dialogVisible:false,
       dialogVisible1:false,
       dialogVisible2:false,
       head:'Company Information',
 
       ProductData:{
+          man_id:'',
           name_cn:'',
           name_en:'',
           decription:'',
@@ -217,34 +219,29 @@ export default {
       },
        BrandData:{     
           brd_id:'',
-          name_en:''
+          name_enb:''
          // image_url:'',
          // operationFlag:'add'
       },
-      value:'',
-      options:[{
-                value:'1',
-                label:'amazon'},
-              {
-                value:'2',
-                 label:'ebay'}
-              ]}
+     }
   },
-  created() {
+   mounted: function () {
     this.loadData()
   },
   methods: {
-    uploadImage:{
+  //   uploadImage:{
 
-    },
-  chooseImage:{
+  //   },
+  // chooseImage:{
 
-  },
+  // },
     loadData () {
-      this.$store.dispatch('getManByFilter').then((result) => {
+      this.$store.dispatch('GetManByFilter').then((result) => {
+        console.log(result.data)
         this.companylist = result.data
       });
-      this.$store.dispatch('getBrandByFilter').then((result) => {
+      this.$store.dispatch('GetBrandByFilter',this.ProductData.man_id).then((result) => {
+        console.log(result.data)
         this.companylist = result.data
       });
     },
@@ -260,7 +257,7 @@ export default {
         if(valid) {
           console.log('the parameter is invalid');
           this.$store.dispatch('UpdateManufacturer',this.ProductData).then((result) => {
-            if (result.data.data){
+            if (result.code==200){
               this.$message({
                 type: 'info',
                 message: `update operation succeeded`
@@ -284,15 +281,11 @@ export default {
       this.dialogVisible1 = true
     },
     addBrand(){
-    this.BrandData={
-      brd_id:'',
-      name_en:''
-    }
     this.$refs.BrandData.validate(valid => {
         if(valid) {
           console.log('valid');
           this.$store.dispatch('AddBrand',this.BrandData).then((result) => {
-            if (result.data.data){
+            if (result.code==200){
               this.$message({
                 type: 'info',
                 message: `add operation succeeded`
@@ -320,7 +313,7 @@ export default {
         if(valid) {
           console.log('the parameter is invalid');
           this.$store.dispatch('UpdateBrand',this.BrandData.brd_id).then((result) => {
-            if (result.data.data){
+            if (result.code==200){
               this.$message({
                 type: 'info',
                 message: `update operation succeeded`
@@ -348,7 +341,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$store.dispatch('DeleteBrand',rowData.brd_id).then((result) => {
-          if (result.data.data){
+          if (result.code==200){
             this.$message({
               type: 'info',
               message: `delete operation succeeded`

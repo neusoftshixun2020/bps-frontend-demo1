@@ -194,6 +194,7 @@ export const constantRoutes = [
       meta: { title: 'My Infomation' }
     }]
   },
+
   {
     path: '/mvo-mycompany',
     component: Layout,

@@ -21,9 +21,9 @@
       <el-input v-model="ruleForm.name_en" style="width:200px" />
     </el-form-item>
 
-    <el-form-item label="Brief Introdution" prop="decription" style="margin-left:20px;">
+    <el-form-item label="Brief Introdution" prop="description" style="margin-left:20px;">
       <el-input
-        v-model="ruleForm.decription"
+        v-model="ruleForm.description"
         style="width:800px"
         :autosize="{ minRows: 8, maxRows: 8}"
         type="textarea"
@@ -33,7 +33,7 @@
 
     <el-form-item label="GMC Report Type "  style="margin-left:20px;" prop='gmc_report_type'>
       <!-- <el-cascader
-            v-model="value"
+            v-model="options.value"
             :options="options"></el-cascader> -->
        <el-input v-model="ruleForm.gmc_report_type" style="width:200px" />
     </el-form-item>
@@ -60,41 +60,34 @@ export default {
         gmc_report_type: '',
         gmc_report_url: ''
       },
-      value:'',
       // options:[{
       //           value:'1',
-      //           label:'amazon'},
+      //           label:'TUV'},
       //         {
       //           value:'2',
-      //            label:'ebay'}
+      //            label:'UL'}
       //         ],
       rules: {
         name_cn: [{ required: true, message: 'Chinese name can not be null', trigger: 'blur' }],
         name_en: [{ required: true, message: 'English name can not be null', trigger: 'blur' }],
-       // options: [{ required: true, message: 'options can not be null', trigger: 'blur' }]
+        options: [{ required: true, message: 'options can not be null', trigger: 'blur' }]
       }
 
     }
   },
-  methods: {
-     
+  methods: { 
     submitForm(){
-      this.ruleForm={
-        name_cn: '',
-        name_en: '',
-        decription: '',
-        gmc_report_type: '',
-        gmc_report_url: ''
-      }
        this.$refs.ruleForm.validate(valid => {
         if(valid) {
           console.log('valid');
           this.$store.dispatch('AddManufacturer',this.ruleForm).then((result) => {
-            if (result.data.data){
+            console.log(result.code)
+            if (result.code==200){
               this.$message({
                 type: 'info',
                 message: `add operation succeeded`
               })
+               this.$router.push({path: '/mvo-mycompany'})
             }else{
               this.$message({
                 type: 'info',
