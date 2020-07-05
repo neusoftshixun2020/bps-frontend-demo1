@@ -1,4 +1,4 @@
-import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,getManByFilter,
+import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,getAllByFilter,
   getBrandByFilter,getAll} from '../../api/addCompany'
   
   const company = {
@@ -28,9 +28,9 @@ import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,ge
         })
       },
 
-      DeleteBrand ({ commit }, brd_id) {
+      DeleteBrand ({ commit }, brandinfo) {
         return new Promise((resolve, reject) => {
-          deleteBrand(brd_id).then(response => {
+          deleteBrand(brandinfo.brd_id).then(response => {
             commit('')
             resolve(response)
           }).catch(error => {
@@ -59,9 +59,9 @@ import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,ge
         })
       })
     },
-    GetManByFilter ({ commit }) {
+    GetAllByFilter ({ commit }) {
       return new Promise((resolve, reject) => {
-        getManByFilter().then(response => {
+        getAllByFilter().then(response => {
           commit('')
           resolve(response)
         }).catch(error => {
@@ -81,9 +81,9 @@ import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,ge
     //   })
     // },
 
-    GetBrandByFilter({ commit }, man_id) {
+    GetBrandByFilter({ commit }, maninfo) {
       return new Promise((resolve, reject) => {
-        getBrandByFilter(man_id).then(response => {
+        getBrandByFilter( maninfo.man_id).then(response => {
           commit('')
           resolve(response)
         }).catch(error => {
