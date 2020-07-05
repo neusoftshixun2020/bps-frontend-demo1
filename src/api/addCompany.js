@@ -95,11 +95,12 @@ export function updateBrand( man_id,name_en,name_cn,created_by,creation_date,las
 }
 
 
-export function getAllByFilter () {
+export function getAllByFilter (man_id) {
   return request({
     url: 'manufacturer/getAllByFilter',
     method: 'post',
     data: {
+      man_id
     }
   })
 }

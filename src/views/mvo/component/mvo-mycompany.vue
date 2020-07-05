@@ -17,7 +17,7 @@
       >
       <el-table-column align="center" prop = ' man_id' label = 'Company ID'>
         </el-table-column>
-         <el-table-column align="center" prop = 'name_cn' label = 'Company Name(CN)'>
+        <el-table-column align="center" prop = 'name_cn' label = 'Company Name(CN)'>
         </el-table-column>
         <el-table-column align="center" prop = 'name_en' label = 'Company Name(EN)'>
         </el-table-column>
@@ -48,9 +48,9 @@
         width="80%"
       >
         <el-table-column type="selection" />
-         <el-table-column align="center" prop = 'brd_id' label = 'Company Name(EN)'>
+         <el-table-column align="center" prop = 'brd_id' label = 'Brand ID'>
         </el-table-column>
-         <el-table-column align="center" prop = 'name_enb' label = 'Company Name(EN)'>
+         <el-table-column align="center" prop = 'name_enb' label = 'Brand Name(EN)'>
         </el-table-column>
           <el-table-column align="center" label="image"  >
           <template slot-scope="scope">
@@ -236,13 +236,17 @@ export default {
 
   // },
     loadData () {
-      // this.$store.dispatch('company/GetAllByFilter').then((result) => {
-      //   console.log(result.data)
-      //   this.companylist = result.data
-      // });
-      this.$store.dispatch('GetBrandByFilter').then((result) => {
+      this.$store.dispatch('GetAllByFilter').then((result) => {
+        console.log("result.data-----companylist")
         console.log(result.data)
+        console.log("result.data.list-----companylist")
         this.companylist = result.data
+      });
+      this.$store.dispatch('GetBrandByFilter',this.ProductData.man_id).then((result) => {
+        console.log("result.data-----brandList")
+        console.log(result.data)
+          console.log("result.data.list-----brandList")
+        this.brandList = result.data
       });
     },
 

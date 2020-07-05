@@ -28,9 +28,9 @@ import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,ge
         })
       },
 
-      DeleteBrand ({ commit }, brandinfo) {
+      DeleteBrand ({ commit }, brd_id) {
         return new Promise((resolve, reject) => {
-          deleteBrand(brandinfo.brd_id).then(response => {
+          deleteBrand(brd_id).then(response => {
             commit('')
             resolve(response)
           }).catch(error => {
@@ -47,8 +47,8 @@ import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,ge
             reject(error)
           })
         })
-      }
-    },
+      },
+    
     AddBrand({ commit }, brandinfo) {
       return new Promise((resolve, reject) => {
         addBrand(brandinfo.name_en).then(response => {
@@ -70,20 +70,10 @@ import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,ge
       })
     },
 
-    // GetAll({ commit }) {
-    //   return new Promise((resolve, reject) => {
-    //     getAll().then(response => {
-    //       commit('')
-    //       resolve(response)
-    //     }).catch(error => {
-    //       reject(error)
-    //     })
-    //   })
-    // },
 
-    GetBrandByFilter({ commit }, maninfo) {
+    GetBrandByFilter({ commit }, man_id) {
       return new Promise((resolve, reject) => {
-        getBrandByFilter( maninfo.man_id).then(response => {
+        getBrandByFilter( man_id).then(response => {
           commit('')
           resolve(response)
         }).catch(error => {
@@ -91,6 +81,6 @@ import { addManufacturer ,updateManufacturer,deleteBrand,addBrand,updateBrand,ge
         })
       })
      }
-   }
- 
+  }
+}
 export default company
