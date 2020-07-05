@@ -236,10 +236,10 @@ export default {
 
   // },
     loadData () {
-      this.$store.dispatch('company/GetAllByFilter').then((result) => {
-        console.log(result.data)
-        this.companylist = result.data
-      });
+      // this.$store.dispatch('company/GetAllByFilter').then((result) => {
+      //   console.log(result.data)
+      //   this.companylist = result.data
+      // });
       this.$store.dispatch('GetBrandByFilter').then((result) => {
         console.log(result.data)
         this.companylist = result.data
