@@ -8,15 +8,14 @@
     <div class="ProductTable">
       <el-table
         ref="multipleTable"
-        :data="companyList"
+        :data="companylist"
         element-loading-text="Loading"
         fit
         border
         highlight-current-row
         width="80%"
       >
-      <el-table-column align="center" prop = ' man_id' label = 'Company ID'>
-        </el-table-column>
+     
         <el-table-column align="center" prop = 'name_cn' label = 'Company Name(CN)'>
         </el-table-column>
         <el-table-column align="center" prop = 'name_en' label = 'Company Name(EN)'>
@@ -50,7 +49,7 @@
         <el-table-column type="selection" />
          <el-table-column align="center" prop = 'brd_id' label = 'Brand ID'>
         </el-table-column>
-         <el-table-column align="center" prop = 'name_enb' label = 'Brand Name(EN)'>
+         <el-table-column align="center" prop = 'name_en' label = 'Brand Name(EN)'>
         </el-table-column>
           <el-table-column align="center" label="image"  >
           <template slot-scope="scope">
@@ -123,13 +122,7 @@
  <!--添加brand弹窗-->
     <el-dialog title='Add Brand' :visible.sync = 'dialogVisible1' width = '50%' :close-on-lick-modal = 'false'>
       <el-form :model = 'BrandData'  ref = 'BrandData' label-width = '0px' class = ''>
-        <el-form-item label="Brand ID" label-width="130px"  prop='brd_id'>
-          <el-col :span="8">
-            <el-input type='text' v-model='BrandData.brd_id'  autocomplete='off' placeholder='Title'>
-            </el-input>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="Brand Name(EN)" label-width="130px"  prop='name_enb'>
+        <el-form-item label="Brand Name(EN)" label-width="130px"  prop='name_en'>
           <el-col :span="8">
             <el-input type='text' v-model='BrandData.name_en'  autocomplete='off' placeholder='Title'>
             </el-input>
@@ -162,7 +155,7 @@
     <el-dialog title='Edit Brand' :visible.sync = 'dialogVisible2' width = '50%' :close-on-lick-modal = 'false'>
       <el-form :model = 'BrandData'  ref = 'BrandData' label-width = '0px' class = ''>
 
-        <el-form-item label="Brand Name(EN)" label-width="130px"  prop='name_enb'>
+        <el-form-item label="Brand Name(EN)" label-width="130px"  prop='name_en'>
           <el-col :span="8">
             <el-input type='text' v-model='BrandData.name_en'  autocomplete='off' placeholder='Title'>
             </el-input>
@@ -219,7 +212,7 @@ export default {
       },
        BrandData:{     
           brd_id:'',
-          name_enb:''
+          name_en:''
          // image_url:'',
          // operationFlag:'add'
       },
@@ -236,18 +229,21 @@ export default {
 
   // },
     loadData () {
-      this.$store.dispatch('GetAllByFilter').then((result) => {
+      this.$store.dispatch('GetAllByFilter',this.ProductData.man_id).then((result) => {
+        
         console.log("result.data-----companylist")
         console.log(result.data)
         console.log("result.data.list-----companylist")
-        this.companylist = result.data
-      });
+        console.log(result.data.list)
+        this.companylist = result.data.list
+      })
       this.$store.dispatch('GetBrandByFilter',this.ProductData.man_id).then((result) => {
         console.log("result.data-----brandList")
         console.log(result.data)
-          console.log("result.data.list-----brandList")
+        console.log("result.data.list-----brandList")
+        console.log(result.data.list)
         this.brandList = result.data
-      });
+      })
     },
 
     EditCompany(rowData){
