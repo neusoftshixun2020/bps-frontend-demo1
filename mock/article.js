@@ -56,7 +56,6 @@ module.exports = [
       }
     }
   },
-
   {
     url: '/vue-element-admin/article/detail',
     type: 'get',
@@ -72,7 +71,6 @@ module.exports = [
       }
     }
   },
-
   {
     url: '/vue-element-admin/article/pv',
     type: 'get',
@@ -90,7 +88,6 @@ module.exports = [
       }
     }
   },
-
   {
     url: '/vue-element-admin/article/create',
     type: 'post',
@@ -101,7 +98,6 @@ module.exports = [
       }
     }
   },
-
   {
     url: '/vue-element-admin/article/update',
     type: 'post',

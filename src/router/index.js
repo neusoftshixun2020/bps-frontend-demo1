@@ -154,11 +154,11 @@ export const constantRoutes = [
   },
   {
     path: '/productDetail',
-    component: Layout,
     hidden: true,
+    component: () => import('@/views/bsp/components/product-detail'),
     children: [{
       path: '',
-      component: () => import('@/views/bsp/components/product-detail'),
+
       name: 'productDetail',
       meta: { title: 'Product Details', icon: 'list' }
     }]
@@ -182,28 +182,6 @@ export const constantRoutes = [
       component: () => import('@/views/bvo/bvo-wallet/component/brand-gmcwallerAcount'),
       name: '',
       meta: { title: 'brand-gmcwallerAcount', icon: 'edit' }
-    }]
-  },
-  {
-    path: '/mvo-myInfo',
-    component: Layout,
-    children: [{
-      path: '/bvo-myInfo',
-      component: () => import('@/views/mvo/mvo-myInfo'),
-      name: 'bvo-myInfo',
-      meta: { title: 'My Infomation' }
-    }]
-  },
-
-  {
-    path: '/mvo-mycompany',
-    component: Layout,
-    hidden: true,
-    children: [{
-      path: '',
-      component: () => import('@/views/mvo/component/mvo-mycompany'),
-      name: '',
-      meta: { title: 'Company Information', icon: 'edit' }
     }]
   }
   // {
@@ -529,6 +507,11 @@ export const asyncRoutes = [
         component: () => import('@/views/excel/upload-excel'),
         name: 'mywallet',
         meta: { title: 'My Wallet' }
+      }, {
+        path: 'testUploadPic',
+        component: () => import('@/views/mvo/testUploadPic'),
+        name: 'testUploadPic',
+        meta: { title: '测试' }
       }
     ]
   },
